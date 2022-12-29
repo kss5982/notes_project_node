@@ -2,8 +2,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
-mongoose.set("strictQuery", true);
+
 app.use(express.json());
 const cors = require("cors");
 app.use(cors());
@@ -18,28 +17,7 @@ app.use(requestLogger);
 
 app.use(express.static("build"));
 
-const url = `mongodb+srv://fullstack:sandhu499@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`;
-
-const noteSchema = new mongoose.Schema({
-  content: String,
-  date: Date,
-  important: Boolean,
-});
-
-const Note = mongoose.model("Note", noteSchema);
-
-noteSchema.set("toJSON", {
-  transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
-    delete returnedObject.__v;
-  },
-});
-
-mongoose.connect(url).then((result) => {
-  console.log("connected");
-});
-
+const Note = require("./models/note");
 let notes = [
   {
     id: 1,
