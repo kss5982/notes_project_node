@@ -37,7 +37,6 @@ mongoose
       result.forEach((note) => {
         console.log(note);
       });
-      mongoose.connection.close();
     });
   })
   .then(() => {
