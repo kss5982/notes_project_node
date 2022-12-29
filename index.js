@@ -15,26 +15,7 @@ app.use(requestLogger);
 
 app.use(express.static("build"));
 
-const mongoose = require("mongoose");
-const url = `mongodb+srv://kss5982:sandhu499@cluster0.b6z9yda.mongodb.net/noteApp?retryWrites=true&w=majority`;
-
-mongoose.connect(url);
-
-const noteSchema = new mongoose.Schema({
-  content: String,
-  date: Date,
-  important: Boolean,
-});
-
-noteSchema.set("toJSON", {
-  transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
-    delete returnedObject.__v;
-  },
-});
-
-const Note = mongoose.model("Note", noteSchema);
+const Note = require("./models/note");
 
 let notes = [
   {
@@ -117,7 +98,7 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint);
 
 // 'npm run dev' to start server using nodemon!!!
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
