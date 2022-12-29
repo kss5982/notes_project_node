@@ -18,6 +18,7 @@ const noteSchema = new mongoose.Schema({
   important: Boolean,
 });
 
+// will be lowercase 'notes' in MongoDB
 const Note = mongoose.model("Note", noteSchema);
 
 mongoose
@@ -25,13 +26,19 @@ mongoose
   .then((result) => {
     console.log("connected");
 
-    const note = new Note({
-      content: "HTML is Easy",
-      date: new Date(),
-      important: true,
-    });
+    // const note = new Note({
+    //   content: "HTML is Easy",
+    //   date: new Date(),
+    //   important: true,
+    // });
 
-    return note.save();
+    // return note.save();
+    Note.find({}).then((result) => {
+      result.forEach((note) => {
+        console.log(note);
+      });
+      mongoose.connection.close();
+    });
   })
   .then(() => {
     console.log("note saved!");
