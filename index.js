@@ -1,5 +1,5 @@
 // imports Node's built-in web server module
-require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -18,7 +18,7 @@ app.use(requestLogger);
 
 app.use(express.static("build"));
 
-const url = `mongodb+srv://fullstack:sandhu499@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`;
+const url = `mongodb+srv://kss5982:sandhu499@cluster0.b6z9yda.mongodb.net/?retryWrites=true&w=majority`;
 
 const noteSchema = new mongoose.Schema({
   content: String,
