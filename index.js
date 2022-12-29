@@ -1,5 +1,5 @@
 // imports Node's built-in web server module
-
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -18,7 +18,7 @@ app.use(requestLogger);
 
 app.use(express.static("build"));
 
-const url = `mongodb+srv://kss5982:sandhu499@cluster0.b6z9yda.mongodb.net/?retryWrites=true&w=majority`;
+const url = `mongodb+srv://fullstack:sandhu499@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`;
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -121,7 +121,7 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint);
 
 // 'npm run dev' to start server using nodemon!!!
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
