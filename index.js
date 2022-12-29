@@ -15,6 +15,19 @@ app.use(requestLogger);
 
 app.use(express.static("build"));
 
+const mongoose = require("mongoose");
+const url = `mongodb+srv://kss5982:sandhu499@cluster0.b6z9yda.mongodb.net/noteApp?retryWrites=true&w=majority`;
+
+mongoose.connect(url);
+
+const noteSchema = new mongoose.Schema({
+  content: String,
+  date: Date,
+  important: Boolean,
+});
+
+const Note = mongoose.model("Note", noteSchema);
+
 let notes = [
   {
     id: 1,
@@ -41,7 +54,9 @@ app.get("/", (request, response) => {
 });
 
 app.get("/api/notes", (request, response) => {
-  response.json(notes);
+  Note.find({}).then((notes) => {
+    response.json(notes);
+  });
 });
 
 app.get("/api/notes/:id", (request, response) => {
