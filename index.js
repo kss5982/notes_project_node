@@ -1,4 +1,5 @@
 // imports Node's built-in web server module
+require("dotenv").config();
 const express = require("express");
 const app = express();
 app.use(express.json());
