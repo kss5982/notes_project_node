@@ -2,5 +2,5 @@ POST http://localhost:3001/api/notes
 
 {
     "content": "VS CODE REST client is pretty good"
-    "important": false
+    "important": true
 }
