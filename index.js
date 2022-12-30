@@ -76,8 +76,8 @@ app.post("/api/notes", (request, response) => {
 
   const note = new Note({
     content: body.content,
-    important: body.important || false,
     date: new Date(),
+    important: body.important || false,
   });
 
   note.save().then((savedNote) => {
