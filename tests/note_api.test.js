@@ -4,7 +4,7 @@ const app = require("../app");
 
 const api = supertest(app);
 
-TextDecoderStream("notes are returned as json", async () => {
+test("notes are returned as json", async () => {
   await api
     .get("/api/notes")
     .expect(200)
