@@ -1,7 +1,7 @@
 const config = require("./utils/config");
 const express = require("express");
 const app = express();
-const cors = require("cors");
+const cors = require("cors"); // cross-port functionality
 const notesRouter = require("./controllers/notes");
 const middleware = require("./utils/middleware");
 const logger = require("./utils/logger");
