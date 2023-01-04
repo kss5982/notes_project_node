@@ -1,16 +1,12 @@
 const mongoose = require("mongoose");
-mongoose.set("strictQuery", false);
 
 const noteSchema = new mongoose.Schema({
   content: {
     type: String,
-    minLength: 5,
     required: true,
+    minlength: 5,
   },
-  date: {
-    type: Date,
-    required: true,
-  },
+  date: Date,
   important: Boolean,
 });
 
