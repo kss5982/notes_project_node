@@ -30,18 +30,17 @@ notesRouter.get("/:id", async (request, response) => {
 });
 
 notesRouter.post("/", async (request, response) => {
-  const { content, important } = request.body;
-
+  const body = request.body;
   const token = getTokenFrom(request);
   const decodedToken = jwt.verify(token, process.env.SECRET);
-  if (!token || !decodedToken.id) {
+  if (!decodedToken.id) {
     return response.status(401).json({ error: "token missing or invalid" });
   }
   const user = await User.findById(decodedToken.id);
 
   const note = new Note({
-    content,
-    important,
+    content: body.content,
+    important: body.important === undefined ? false : body.important,
     date: new Date(),
     user: user._id,
   });
@@ -50,7 +49,7 @@ notesRouter.post("/", async (request, response) => {
   user.notes = user.notes.concat(savedNote._id);
   await user.save();
 
-  response.status(201).json(savedNote);
+  response.json(savedNote);
 });
 
 notesRouter.delete("/:id", async (request, response) => {
